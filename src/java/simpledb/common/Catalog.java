@@ -79,15 +79,7 @@ public class Catalog {
      * @throws NoSuchElementException if the table doesn't exist
      */
     public int getTableId(String name) throws NoSuchElementException {
-    	for (String tableName : nameStack.keySet()) {
-    		if (tableName.equals(name)) {
-    			return nameStack.get(tableName).peek();
-    		}
-    	}
-//    	if (catalog.containsKey(name)) {
-//    		return catalog.get(name).getId();
-//    	}
-        throw new NoSuchElementException();
+    	return nameStack.get(name).peek();
     }
 
     /**
@@ -97,15 +89,7 @@ public class Catalog {
      * @throws NoSuchElementException if the table doesn't exist
      */
     public TupleDesc getTupleDesc(int tableid) throws NoSuchElementException {
-    	for (int tableId : files.keySet()) {
-    		if (tableId == tableid) {
-    			return files.get(tableId).getTupleDesc();
-    		}
-//    		if (catalog.get(key).getId() == tableid) {
-//    			return catalog.get(key).getTupleDesc();
-//    		}
-    	}
-        throw new NoSuchElementException();
+    	return files.get(tableid).getTupleDesc();
     }
 
     /**
@@ -115,45 +99,19 @@ public class Catalog {
      *     function passed to addTable
      */
     public DbFile getDatabaseFile(int tableid) throws NoSuchElementException {
-//    	System.out.println(files.get(tableid));
-    	for (int tableId : files.keySet()) {
-    		if (tableId == tableid) {
-    			return files.get(tableId);
-    		}
-    	}
-//    	for (String key : catalog.keySet()) {
-//    		if (catalog.get(key).getId() == tableid) {
-//    			return catalog.get(key);
-//    		}
-//    	}
-        throw new NoSuchElementException();
+    	return files.get(tableid);
     }
 
     public String getPrimaryKey(int tableid) throws NoSuchElementException {
-    	for (int tableId : primaryKey.keySet()) {
-    		if (tableId == tableid) {
-    			return primaryKey.get(tableId);
-    		}
-    	}
-        throw new NoSuchElementException();
+    	return primaryKey.get(tableid);
     }
 
     public Iterator<Integer> tableIdIterator() {
-//    	ArrayList<Integer> tableIds = new ArrayList<Integer>();
-//    	for (int tableId : catalog.keySet()) {
-//    		tableIds.add(catalog.get(key).getId());
-//    	}
     	return catalog.keySet().iterator();
-//        return tableIds.iterator();
     }
 
     public String getTableName(int id) throws NoSuchElementException {
-    	for (int tableId : catalog.keySet()) {
-    		if (tableId == id) {
-    			return catalog.get(tableId);
-    		}
-    	}
-        throw new NoSuchElementException();
+    	return catalog.get(id);
     }
     
     /** Delete all tables from the catalog */
