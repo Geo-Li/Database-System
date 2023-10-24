@@ -79,7 +79,12 @@ public class Catalog {
      * @throws NoSuchElementException if the table doesn't exist
      */
     public int getTableId(String name) throws NoSuchElementException {
-    	return nameStack.get(name).peek();
+    	for (String n : nameStack.keySet()) {
+    		if (n.equals(name)) {
+    			return nameStack.get(name).peek();
+    		}
+    	}
+    	throw new NoSuchElementException();
     }
 
     /**
