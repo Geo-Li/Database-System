@@ -83,7 +83,7 @@ public class HeapFile implements DbFile {
         	RandomAccessFile heapFile = new RandomAccessFile(file, "r");
         	int pageNumber = pid.getPageNumber();
         	// set the space for the new page
-        	int pageSize = Database.getBufferPool().getPageSize();
+        	int pageSize = BufferPool.getPageSize();
         	byte[] content = new byte[pageSize];
         	heapFile.seek(pageSize * pageNumber);
         	heapFile.read(content);
